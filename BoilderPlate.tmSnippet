@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>//Today//
+//End//
+
+//Goals//
+	${0:Goal}
+//End//
+
+//Todo//
+//End//
+
+//Closed//
+//End//
+</string>
+	<key>name</key>
+	<string>Boilerplate</string>
+	<key>scope</key>
+	<string>source.GPD</string>
+	<key>tabTrigger</key>
+	<string>//</string>
+	<key>uuid</key>
+	<string>BB7C03AC-7BE2-4A7A-8719-694630484BBA</string>
+</dict>
+</plist>

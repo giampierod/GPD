@@ -1,0 +1,8 @@
+[
+  {"keys": ["ctrl+shift+,"], "command": "add_date" }, 
+  {"keys": ["ctrl+shift+."], "command": "select_todo" },
+  {"keys": ["ctrl+shift+down"], "command": "done_todo" },
+  {"keys": ["ctrl+shift+-"], "command": "todo_timer_start" },
+  {"keys": ["ctrl+shift+="], "command": "todo_timer_stop" },
+  {"keys": ["ctrl+shift+up"], "command": "done_todo_repeat"}
+]

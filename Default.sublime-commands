@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "Todo Timer: Start",
+        "command": "todo_timer_start"
+    },
+    {
+        "caption": "Todo Timer: Pause",
+        "command": "Todo_timer_pause"
+    },
+    {
+        "caption": "Todo Timer: Stop",
+        "command": "todo_timer_stop"
+    },
+    {
+    	"caption": "Todo Timer: Status",
+    	"command": "todo_timer_status"
+    }
+]

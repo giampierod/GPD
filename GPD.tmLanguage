@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>GPD</string>
+	</array>
+	<key>foldingStartMarker</key>
+	<string>//(?!End)[\w\d\s]*//</string>
+	<key>foldingStopMarker</key>
+	<string>//End//</string>
+	<key>name</key>
+	<string>GPD</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>#\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>entity.other.inherited-class</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>@\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>support.class</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>!\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>~\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>storage.type</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\$\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>constant.numeric</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.GPD</string>
+	<key>uuid</key>
+	<string>806A1944-52D6-459F-A1A1-B243CB196581</string>
+</dict>
+</plist>
