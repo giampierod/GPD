@@ -29,7 +29,7 @@ Steo 2. Create some Goals and Todos. All the symbols listed above (#, !, @, $, ~
 
 Step 3. Start working on todos. There are some shortcuts to help you:
 - ctrl+shift+. will put the current todo at the top of the //Today// section
-- ctrl+shift+end will put the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
-- ctrl+shift+insert will do the same as ctrl+shift+end except it will also put the same todo at the bottom of the //Todo// section
+- ctrl+shift+down will put the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
+- ctrl+shift+up will do the same as ctrl+shift+end except it will also put the same todo at the bottom of the //Todo// section
 - ctrl+shift+- will start a time to track the time it takes to do the todo
 - ctrl+shift+= will stop the timer and put a $(total_time) at the end of the todo
