@@ -7,7 +7,7 @@ Special Text
 ============
 There are 5 symbols that can be used to encapsulate text which gives the text special meaning.
 
-#(Project) = Represents a project or collection of work that is larger than an indvidual todo
+\#(Project) = Represents a project or collection of work that is larger than an indvidual todo
 !(Target) = Represents some measurable aspect of a project or a todo. For example, a target weight for a weight loss project or the due date of a project.
 @(Context) = Represents People, Places, or Times that the todo is related to. For example, a meeting room or the time of the meeting. 
 $(Cost) = Represents the time it took to complete the task. This is totally free form, so you could put the actual time in hours, minutes, seconds or some other metric like pomodoros.
