@@ -1,7 +1,35 @@
 [
-  {"keys": ["super+shift+."], "command": "select_todo" },
-  {"keys": ["super+shift+down"], "command": "done_todo" },
-  {"keys": ["super+shift+-"], "command": "todo_timer_start" },
-  {"keys": ["super+shift+="], "command": "todo_timer_stop" },
-  {"keys": ["super+shift+up"], "command": "done_todo_repeat"}
+	{"keys": ["super+shift+."], "command": "select_todo" },
+	{"keys": ["super+shift+down"], "command": "done_todo" },
+	{"keys": ["super+shift+-"], "command": "todo_timer_start" },
+	{"keys": ["super+shift+="], "command": "todo_timer_stop" },
+	{"keys": ["super+shift+up"], "command": "done_todo_repeat"},
+
+  	// Auto-pair @()
+	{ "keys": ["@"], "command": "insert_snippet", "args": {"contents": "@(${0:$SELECTION})"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+		]
+	},
+	
+
+	// Auto-pair #()
+	{ "keys": ["#"], "command": "insert_snippet", "args": {"contents": "#(${0:$SELECTION})"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+		]
+	},
+
+	// Auto-pair !()
+	{ "keys": ["!"], "command": "insert_snippet", "args": {"contents": "!(${0:$SELECTION})"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+		]
+	}
 ]
