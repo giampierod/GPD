@@ -27,7 +27,7 @@ DEALINGS IN THE SOFTWARE.
 //End//
 
 //Goals//
-	${0:Goal}
+	${1:Goal} ${0}
 //End//
 
 //Todo//
