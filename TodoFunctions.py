@@ -1,25 +1,39 @@
-# Copyright (c) 2013 Giampiero De Ciantis <gdeciantis@gmail.com>
+""" 
+Copyright (c) 2013 Giampiero De Ciantis <gdeciantis@gmail.com>
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of 
-# this software and associated documentation files (the "Software"), to deal in the 
-# Software without restriction, including without limitation the rights to use, copy, 
-# modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
-# and to permit persons to whom the Software is furnished to do so, subject to the 
-# following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in the 
+Software without restriction, including without limitation the rights to use, copy, 
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+and to permit persons to whom the Software is furnished to do so, subject to the 
+following conditions:
 
-# The above copyright notice and this permission notice shall be included in all copies 
-# or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies 
+or substantial portions of the Software.
 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-# PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
-# FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
-# OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-# DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+"""
 
 import datetime, getpass
 import sublime, sublime_plugin
 import re
+
+def TODO_HEADER_STRING(): 
+    return "//Todo//"
+
+def CLOSED_HEADER_STRING():
+    return "//Closed//"
+
+def TODAY_HEADER_STRING():
+    return "//Today//"
+
+def FOOTER_STRING():
+    return "//End//"
 
 def is_header(text):
     return re.match("//(.*)//", text)
@@ -41,11 +55,9 @@ def move_todo_to_section(section, self, edit, prefix=""):
 
 def add_to_todo(self, edit):
     cur_line = self.view.full_line(self.view.sel()[0].begin())
-    if not is_header(self.view.substr(cur_line).strip()):
-        todo_header_string = "//Todo//"
-        todo_footer_string = "//End//"
-        todo_top = self.view.find(todo_header_string, 0)
-        todo_bottom = self.view.find(todo_footer_string, todo_top.b)
+    if not is_header(self.view.substr(cur_line).strip()):        
+        todo_top = self.view.find(TODO_HEADER_STRING(), 0)
+        todo_bottom = self.view.find(FOOTER_STRING(), todo_top.b)
         todo = re.sub("\$\([a-zA-Z0-9_ ]*\)[ ]?", '', self.view.substr(cur_line).rstrip())
         self.view.insert(edit, todo_bottom.a - 1, "\n" + todo)
     else:
@@ -66,6 +78,17 @@ class DoneTodoRepeatCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         add_to_todo(self, edit)
         close_todo(self, edit)
+
+class NewTodoCommand(sublime_plugin.TextCommand):    
+    def run(self, edit):
+        todo_top = self.view.find(TODO_HEADER_STRING(),0)
+        todo_bottom = self.view.find(FOOTER_STRING(), todo_top.b)
+        inserted_length = self.view.insert(edit, todo_bottom.a - 1, "\n" + "    ") - 1
+        cur_todo_pt = self.view.rowcol(todo_bottom.a)
+        new_todo_pt = self.view.text_point(cur_todo_pt[0], cur_todo_pt[1] + inserted_length)
+        self.view.sel().clear()
+        self.view.sel().add(new_todo_pt)
+        self.view.show(new_todo_pt)
         
 
 def increment_seconds():
@@ -125,5 +148,3 @@ class TodoTimerStopCommand(sublime_plugin.TextCommand):
 
         sublime.todo_timer_seconds = 0
         sublime.todo_timer_time = None
-
-

@@ -1,10 +1,19 @@
 [
 	{"keys": ["ctrl+shift+,"], "command": "add_date" }, 
 	{"keys": ["ctrl+shift+."], "command": "select_todo" },
-	{"keys": ["ctrl+shift+down"], "command": "done_todo" },
+	{"keys": ["ctrl+shift+down"], "command": "done_todo", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" }
+		]
+	},
 	{"keys": ["ctrl+shift+-"], "command": "todo_timer_start" },
 	{"keys": ["ctrl+shift+="], "command": "todo_timer_stop" },
-	{"keys": ["ctrl+shift+up"], "command": "done_todo_repeat"},
+	{"keys": ["ctrl+shift+up"], "command": "done_todo_repeat", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" }
+		]
+	},
+	{"keys": ["ctrl+shift+n"], "command": "new_todo"},
 	// Auto-pair @()
 
 	{ "keys": ["@"], "command": "insert_snippet", "args": {"contents": "@(${0:$SELECTION})"}, "context":

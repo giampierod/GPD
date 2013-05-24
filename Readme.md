@@ -19,7 +19,8 @@ Todos are divided into different sections. Today, Goals, Todo, and Closed. These
 ###Usage
 1. Create a new file. Type //-tab and select Boilerplate from the selection box. It will instantly give you the section layouts  
 2. Create some Goals and Todos. All the symbols listed above (#, !, @, $, ~) are all tab triggered. I usually start with goals and specify #(Project) !(Target) for each goal and try to avoid any free form text. That's just a suggestion, this thing is free form.  
-3. Start working on todos. There are some shortcuts to help you:
+3. Start working on todos. There are some shortcuts to help you (for Mac OS X replace `ctrl` with `super`):
+	* `ctrl+shift+n` will create a new item at the bottom of the //Todo// section
 	* `ctrl+shift+.` will put the current todo at the top of the //Today// section
 	* `ctrl+shift+down` will put the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
 	* `ctrl+shift+up` will do the same as `ctrl+shift+down` except it will also put the same todo at the bottom of the //Todo// section
