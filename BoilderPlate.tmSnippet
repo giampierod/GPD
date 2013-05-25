@@ -27,10 +27,10 @@ DEALINGS IN THE SOFTWARE.
 //End//
 
 //Goals//
-	${1:Goal} ${0}
 //End//
 
 //Todo//
+	${1:Todo} ${0}
 //End//
 
 //Closed//
