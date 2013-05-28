@@ -25,6 +25,7 @@ DEALINGS IN THE SOFTWARE.
 	<key>fileTypes</key>
 	<array>
 		<string>GPD</string>
+		<string>GPD_Note</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>//(?!End)[\w\d\s]*//</string>
