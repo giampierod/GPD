@@ -60,31 +60,37 @@ def find_note_header(view, header_text):
         
 
 def note_exists(view, cur_line):
-    first_note = view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
-    if first_note != None and cur_line.contains(first_note):
-        return True
+    first_note = view.find(note_pat(), cur_line.a, sublime.IGNORECASE)    
+    if first_note is not None:
+        return cur_line.contains(first_note)
     else:
         return False
 
+def open_note_file(view):
+    return view.window().open_file(view.file_name() + "_Note")
+
 class OpenNoteCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        LoadListener._clear()
         note_time = datetime.now().strftime("%Y.%m.%d.%H.%M")
         cur_line = self.view.full_line(self.view.sel()[0].begin())
-        note_view = self.view.window().open_file(self.view.file_name() + "_Note")
         todo_str = self.view.substr(cur_line).strip()
-        if note_exists(self.view, cur_line):
+        ne = note_exists(self.view, cur_line)        
+        if ne:
             first_note = self.view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
             m = re.search(note_pat(), self.view.substr(first_note))
             inner_note = m.group(1)
             todo_str_min = todo_str.replace(m.group(0),"").strip()
+            note_view = open_note_file(self.view)
             if note_view.is_loading():
                 LoadListener._set(note_view.file_name(), inner_note, todo_str_min, True)
             elif find_note_header(note_view, inner_note) == False:
                 prepare_view(note_view, inner_note, todo_str_min)
         else:
             self.view.insert(edit, cur_line.end() - 1, " `({0})".format(note_time))
+            note_view = open_note_file(self.view)
             if note_view.is_loading():
-                LoadListener._set(note_view.file_name(), note_time, todo_str)
+                LoadListener._set(note_view.file_name(), note_time, todo_str, False)
             else:
                 prepare_view(note_view, note_time, todo_str)
         
@@ -96,19 +102,20 @@ class LoadListener(sublime_plugin.EventListener):
     
     @staticmethod
     def _set(filename, time, todo, exists):
-        global target_filename
-        global note_time
-        global todo_str
-        global note_exists
-        target_filename = filename
-        note_time = time
-        todo_str = todo
-        note_exists = exists
+        LoadListener.target_filename = filename
+        LoadListener.note_time = time
+        LoadListener.todo_str = todo
+        LoadListener.note_exists = exists
+
+    @staticmethod
+    def _clear():
+        LoadListener._set("","","",False)
 
     def on_load(self, view):
-        if note_exists and find_note_header(LoadListener.view, LoadListener.note_time):
+        if note_exists and find_note_header(view, LoadListener.note_time):            
             pass
         elif view.file_name() == LoadListener.target_filename:
+            sublime.status_message("loaded!")
             prepare_view(view, LoadListener.note_time, LoadListener.todo_str)
             LoadListener.target_filename = ""
             LoadListener.note_time = ""
