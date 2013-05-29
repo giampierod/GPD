@@ -106,7 +106,7 @@ class LoadListener(sublime_plugin.EventListener):
         note_exists = exists
 
     def on_load(self, view):
-        if note_exists and find_note_header(LoadListenr.view, LoadListener.note_time):
+        if note_exists and find_note_header(LoadListener.view, LoadListener.note_time):
             pass
         elif view.file_name() == LoadListener.target_filename:
             prepare_view(view, LoadListener.note_time, LoadListener.todo_str)

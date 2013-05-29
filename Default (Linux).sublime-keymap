@@ -1,5 +1,5 @@
 [
-	{"keys": ["ctrl+shift+,"], "command": "add_date" }, 
+	{"keys": ["ctrl+shift+,"], "command": "open_note" }, 
 	{"keys": ["ctrl+shift+."], "command": "select_todo" },
 	{"keys": ["ctrl+shift+down"], "command": "done_todo", "context":
 		[
