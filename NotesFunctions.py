@@ -46,14 +46,10 @@ def find_note_header(view, header_text):
         note_header = view.full_line(search)
         note_footer = view.full_line(view.find("//End//", note_header.b))
         view.unfold(note_header.cover(note_footer))
-        edit = view.begin_edit()
-        inserted_length = view.insert(edit, note_footer.a - 1, "\n    ") - 1
-        view.end_edit(edit)
-        cur_note_pt = view.rowcol(note_footer.a)
-        append_pt = view.text_point(cur_note_pt[0], cur_note_pt[1] + inserted_length)
+        end_of_note = note_footer.a - 1                        
         view.sel().clear()
-        view.sel().add(append_pt)
-        view.show(append_pt)
+        view.sel().add(end_of_note)
+        view.show(end_of_note)
         return True
     else:
         return False
@@ -115,7 +111,6 @@ class LoadListener(sublime_plugin.EventListener):
         if note_exists and find_note_header(view, LoadListener.note_time):            
             pass
         elif view.file_name() == LoadListener.target_filename:
-            sublime.status_message("loaded!")
             prepare_view(view, LoadListener.note_time, LoadListener.todo_str)
             LoadListener.target_filename = ""
             LoadListener.note_time = ""
