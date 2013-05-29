@@ -23,39 +23,92 @@ from datetime import datetime
 import time
 import threading
 import sublime, sublime_plugin
-
-targetView = None
+import re
 
 def prepare_view(view, note_time, todo_str):
     edit = view.begin_edit()
     note_header = "//{0}//".format(note_time)
     note_footer = "//End//"
-    note_boiler_str = "{0}\n    {1}\n    \n{2}\n".format(note_header, todo_str,note_footer)
+    note_boiler_str = "{0}\n    {1}\n\n    \n{2}\n\n".format(note_header, todo_str,note_footer)
     boiler_length = view.insert(edit, 0, note_boiler_str)
-    boiler_region = sublime.Region(boiler_length - (len(note_footer) + 2), boiler_length - (len(note_footer) + 2))
+    boiler_region = sublime.Region(boiler_length - (len(note_footer) + 3), boiler_length - (len(note_footer) + 3))
     view.sel().clear()
     view.sel().add(boiler_region)
     view.show(boiler_region)
     view.end_edit(edit)
 
+def note_pat():
+    return '`\((.*)\)'
+
+def find_note_header(view, header_text):
+    search = view.find("//{0}//".format(header_text),0)
+    if search != None:
+        note_header = view.full_line(search)
+        note_footer = view.full_line(view.find("//End//", note_header.b))
+        view.unfold(note_header.cover(note_footer))
+        edit = view.begin_edit()
+        inserted_length = view.insert(edit, note_footer.a - 1, "\n    ") - 1
+        view.end_edit(edit)
+        cur_note_pt = view.rowcol(note_footer.a)
+        append_pt = view.text_point(cur_note_pt[0], cur_note_pt[1] + inserted_length)
+        view.sel().clear()
+        view.sel().add(append_pt)
+        view.show(append_pt)
+        return True
+    else:
+        return False
+        
+
+def note_exists(view, cur_line):
+    first_note = view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
+    if first_note != None and cur_line.contains(first_note):
+        return True
+    else:
+        return False
+
 class OpenNoteCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         note_time = datetime.now().strftime("%Y.%m.%d.%H.%M")
         cur_line = self.view.full_line(self.view.sel()[0].begin())
-        self.view.insert(edit, cur_line.end() - 1, " `({0})".format(note_time))
-        todo_str = self.view.substr(cur_line).strip()
-        LoadListener.target_filename = note_view.file_name()
-        LoadListener.note_time = note_time
-        LoadListener.todo_str = todo_str
         note_view = self.view.window().open_file(self.view.file_name() + "_Note")
+        todo_str = self.view.substr(cur_line).strip()
+        if note_exists(self.view, cur_line):
+            first_note = self.view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
+            m = re.search(note_pat(), self.view.substr(first_note))
+            inner_note = m.group(1)
+            todo_str_min = todo_str.replace(m.group(0),"").strip()
+            if note_view.is_loading():
+                LoadListener._set(note_view.file_name(), inner_note, todo_str_min, True)
+            elif find_note_header(note_view, inner_note) == False:
+                prepare_view(note_view, inner_note, todo_str_min)
+        else:
+            self.view.insert(edit, cur_line.end() - 1, " `({0})".format(note_time))
+            if note_view.is_loading():
+                LoadListener._set(note_view.file_name(), note_time, todo_str)
+            else:
+                prepare_view(note_view, note_time, todo_str)
         
 class LoadListener(sublime_plugin.EventListener):
     target_filename = ""
     note_time = ""
     todo_str = ""
+    note_exists = False
+    
+    @staticmethod
+    def _set(filename, time, todo, exists):
+        global target_filename
+        global note_time
+        global todo_str
+        global note_exists
+        target_filename = filename
+        note_time = time
+        todo_str = todo
+        note_exists = exists
 
     def on_load(self, view):
-        if view.file_name() == LoadListener.target_filename:
+        if note_exists and find_note_header(LoadListenr.view, LoadListener.note_time):
+            pass
+        elif view.file_name() == LoadListener.target_filename:
             prepare_view(view, LoadListener.note_time, LoadListener.todo_str)
             LoadListener.target_filename = ""
             LoadListener.note_time = ""
