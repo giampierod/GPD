@@ -27,7 +27,7 @@ DEALINGS IN THE SOFTWARE.
 	<key>name</key>
 	<string>Cost</string>
 	<key>scope</key>
-	<string>source.GPD</string>
+	<string>source.GPD,source.GPD_Note</string>
 	<key>tabTrigger</key>
 	<string>$</string>
 	<key>uuid</key>

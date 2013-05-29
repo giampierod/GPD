@@ -38,46 +38,46 @@ def FOOTER_STRING():
 def is_header(text):
     return re.match("//(.*)//", text)
 
-def move_todo_to_section(section, self, edit, prefix=""):
-    cur_line = self.view.full_line(self.view.sel()[0].begin())
-    if not is_header(self.view.substr(cur_line).strip()):
+def move_todo_to_section(section, view, edit, prefix=""):
+    cur_line = view.full_line(view.sel()[0].begin())
+    if not is_header(view.substr(cur_line).strip()):
         header_string = "//" + section + "//"
-        header_top = self.view.find(header_string, 0)
-        todo = "    " + prefix + self.view.substr(cur_line).strip()
+        header_top = view.find(header_string, 0)
+        todo = "    " + prefix + view.substr(cur_line).strip()
         if header_top.b < cur_line.a:
-            self.view.erase(edit, cur_line)
-            self.view.insert(edit, header_top.b, "\n" + todo)        
+            view.erase(edit, cur_line)
+            view.insert(edit, header_top.b, "\n" + todo)        
         else:
-            self.view.insert(edit, header_top.b, "\n" + todo)
-            self.view.erase(edit, cur_line)
+            view.insert(edit, header_top.b, "\n" + todo)
+            view.erase(edit, cur_line)
     else:
         sublime.status_message("Can't move section marker.")
 
-def add_to_todo(self, edit):
-    cur_line = self.view.full_line(self.view.sel()[0].begin())
-    if not is_header(self.view.substr(cur_line).strip()):        
-        todo_top = self.view.find(TODO_HEADER_STRING(), 0)
-        todo_bottom = self.view.find(FOOTER_STRING(), todo_top.b)
-        todo = re.sub("\$\([a-zA-Z0-9_ ]*\)[ ]?", '', self.view.substr(cur_line).rstrip())
-        self.view.insert(edit, todo_bottom.a - 1, "\n" + todo)
+def add_to_todo(view, edit):
+    cur_line = view.full_line(view.sel()[0].begin())
+    if not is_header(view.substr(cur_line).strip()):        
+        todo_top = view.find(TODO_HEADER_STRING(), 0)
+        todo_bottom = view.find(FOOTER_STRING(), todo_top.b)
+        todo = re.sub("\$\([a-zA-Z0-9_ ]*\)[ ]?", '', view.substr(cur_line).rstrip())
+        view.insert(edit, todo_bottom.a - 1, "\n" + todo)
     else:
         sublime.status_message("Can't move section marker.")
 
-def close_todo(self, edit):
+def close_todo(view, edit):
     closed_time = "~(" + datetime.datetime.now().strftime("%d/%m/%y %H:%M") + ") "
-    move_todo_to_section("Closed", self, edit, closed_time)
+    move_todo_to_section("Closed", view, edit, closed_time)
 
 class SelectTodoCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		move_todo_to_section("Today", self, edit)
+		move_todo_to_section("Today", self.view, edit)
 
 class DoneTodoCommand(sublime_plugin.TextCommand):
-	def run(self, edit): close_todo(self, edit)
+	def run(self, edit): close_todo(self.view, edit)
 
 class DoneTodoRepeatCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        add_to_todo(self, edit)
-        close_todo(self, edit)
+        add_to_todo(self.view, edit)
+        close_todo(self.view, edit)
 
 class NewTodoCommand(sublime_plugin.TextCommand):    
     def run(self, edit):

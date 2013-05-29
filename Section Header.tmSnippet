@@ -29,7 +29,7 @@ $0
 	<key>name</key>
 	<string>Section Header</string>
 	<key>scope</key>
-	<string>source.GPD</string>
+	<string>source.GPD,source.GPD_Note</string>
 	<key>tabTrigger</key>
 	<string>/</string>
 	<key>uuid</key>

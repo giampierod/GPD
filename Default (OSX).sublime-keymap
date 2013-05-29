@@ -1,5 +1,5 @@
 [
-	{"keys": ["super+shift+,"], "command": "new_note" }, 
+	{"keys": ["super+shift+,"], "command": "open_note" }, 
 	{"keys": ["super+shift+."], "command": "select_todo" },
 	{"keys": ["super+shift+down"], "command": "done_todo", "context":
 		[

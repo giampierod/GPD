@@ -24,14 +24,14 @@ DEALINGS IN THE SOFTWARE.
 <dict>
 	<key>fileTypes</key>
 	<array>
-		<string>GPD</string>
+		<string>GPD_Note</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>//(?!End)[\w\d\s]*//</string>
 	<key>foldingStopMarker</key>
 	<string>//End//</string>
 	<key>name</key>
-	<string>GPD</string>
+	<string>GPD_Note</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -84,8 +84,8 @@ DEALINGS IN THE SOFTWARE.
 		</dict>
 	</array>
 	<key>scopeName</key>
-	<string>source.GPD</string>
+	<string>source.GPD_Note</string>
 	<key>uuid</key>
-	<string>806A1944-52D6-459F-A1A1-B243CB196581</string>
+	<string>221EF723-B103-4849-845C-2A8D271E1FC2</string>
 </dict>
 </plist>
