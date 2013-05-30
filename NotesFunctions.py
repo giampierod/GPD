@@ -65,6 +65,13 @@ def note_exists(view, cur_line):
 def open_note_file(view):
     return view.window().open_file(view.file_name() + "_Note")
 
+class OpenTodoCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        filename = self.view.file_name()[:-len("_Note")]
+        self.view.window().open_file(filename)
+
+
+
 class OpenNoteCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         LoadListener._clear()

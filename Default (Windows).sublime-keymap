@@ -1,5 +1,14 @@
 [
-	{"keys": ["ctrl+shift+,"], "command": "open_note" }, 
+	{"keys": ["ctrl+shift+,"], "command": "open_note", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD" }
+		]
+	},
+	{"keys": ["ctrl+shift+,"], "command": "open_todo", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "source.GPD_Note" }
+		]
+	}, 
 	{"keys": ["ctrl+shift+."], "command": "select_todo" },
 	{"keys": ["ctrl+shift+down"], "command": "done_todo", "context":
 		[
