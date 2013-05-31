@@ -82,6 +82,14 @@ DEALINGS IN THE SOFTWARE.
 			<key>name</key>
 			<string>comment</string>
 		</dict>
+		<dict>
+			<key>begin</key>
+			<string>//</string>
+			<key>end</key>
+			<string>//</string>
+			<key>name</key>
+			<string>comment</string>
+		</dict>
 	</array>
 	<key>scopeName</key>
 	<string>source.GPD_Note</string>

@@ -24,6 +24,7 @@ import time
 import threading
 import sublime, sublime_plugin
 import re
+from TodoFunctions import is_header
 
 def prepare_view(view, note_time, todo_str):
     edit = view.begin_edit()
@@ -31,6 +32,7 @@ def prepare_view(view, note_time, todo_str):
     note_footer = "//End//"
     note_boiler_str = "{0}\n    {1}\n\n    \n{2}\n\n".format(note_header, todo_str,note_footer)
     boiler_length = view.insert(edit, 0, note_boiler_str)
+    collapse_other_notes(view, sublime.Region(0, boiler_length - 1))
     boiler_region = sublime.Region(boiler_length - (len(note_footer) + 3), boiler_length - (len(note_footer) + 3))
     view.sel().clear()
     view.sel().add(boiler_region)
@@ -40,16 +42,22 @@ def prepare_view(view, note_time, todo_str):
 def note_pat():
     return '`\((.*)\)'
 
+def collapse_other_notes(view,note_region):
+    view.unfold(note_region)
+    view.fold(sublime.Region(0,note_region.a))
+    view.fold(sublime.Region(note_region.b,view.size() - 1))
+
 def find_note_header(view, header_text):
     search = view.find("//{0}//".format(header_text),0)
     if search != None:
         note_header = view.full_line(search)
         note_footer = view.full_line(view.find("//End//", note_header.b))
-        view.unfold(note_header.cover(note_footer))
         end_of_note = note_footer.a - 1                        
         view.sel().clear()
         view.sel().add(end_of_note)
         view.show(end_of_note)
+        note_region = note_header.cover(note_footer)
+        collapse_other_notes(view, note_region)
         return True
     else:
         return False
@@ -74,12 +82,14 @@ class OpenTodoCommand(sublime_plugin.TextCommand):
 
 class OpenNoteCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+
         LoadListener._clear()
         note_time = datetime.now().strftime("%Y.%m.%d.%H.%M")
         cur_line = self.view.full_line(self.view.sel()[0].begin())
+        if is_header(self.view.substr(cur_line)):
+            return
         todo_str = self.view.substr(cur_line).strip()
-        ne = note_exists(self.view, cur_line)        
-        if ne:
+        if note_exists(self.view, cur_line):
             first_note = self.view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
             m = re.search(note_pat(), self.view.substr(first_note))
             inner_note = m.group(1)
