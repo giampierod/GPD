@@ -1,6 +1,6 @@
 ###About the GPD System
 
-The GPD system is meant for people who spend a great deal of time text editing. It is a Todo app with the power of GTD and Mark Forster's Final Version, but the simplicity of writing a final. Except for Section headers every line is a todo item. Special symbols allow you to understand different aspects of the todo item. Using combinations of regular and symbolized everything is free form, with the ability to understand general organization. I doubt this tool is for everyone, but I find it quite useful.
+The GPD system is meant for people who spend a great deal of time text editing. It is a Todo app with the power of GTD and Mark Forster's Final Version with ninjitsu shortcuts for maximum workflow speed. Except for Section headers every line is a todo item. Special symbols allow you to understand different aspects of the todo item. Using combinations of regular and symbolic text, everything is free form text.  
 
 ###Pre-Requisites
 
@@ -11,7 +11,7 @@ Once you got Sublime Text 2 up and running there two methods of installing GPD.
 ###Instal Method 1 - Recommended
 1. Start Sublime Text 2
 2. Install Package Control from will bond (http://wbond.net/sublime_packages/package_control)
-Open the Sublime Text 2 console by pressing `ctrl+`` shortcut. Paste the text below into the console that appears.
+Open the Sublime Text 2 console by pressing `ctrl+```` shortcut. Paste the text below into the console that appears.
 
 	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
 
