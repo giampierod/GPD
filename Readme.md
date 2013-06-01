@@ -53,11 +53,11 @@ Shortcuts make GPD what it is, if you don't learn them it's not really going to 
 
 For Mac replace `ctrl` with `command`.
 
-	* `ctrl+shift+n` - Create a new Todo at the bottom of the //Todo// section
-	* `ctrl+shift+.` - Move the currently selected Todo at the top of the //Today// section
-	* `ctrl+shift+down` - Move the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
-	* `ctrl+shift+up` - Do the same as `ctrl+shift+down` except it will also copy the todo to the bottom of the //Todo// section
-	* `ctrl+shift+,` - Get the note for this todo. It will either find or create the note for you in a companion `.GPD_Note` file. When in the GPD_Note file, you can press this again to switch back.
+* `ctrl+shift+n` - Create a new Todo at the bottom of the //Todo// section
+* `ctrl+shift+.` - Move the currently selected Todo at the top of the //Today// section
+* `ctrl+shift+down` - Move the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
+* `ctrl+shift+up` - Do the same as `ctrl+shift+down` except it will also copy the todo to the bottom of the //Todo// section
+* `ctrl+shift+,` - Get the note for this todo. It will either find or create the note for you in a companion `.GPD_Note` file. When in the GPD_Note file, you can press this again to switch back.
 
 ###Special Text
 
