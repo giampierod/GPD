@@ -20,7 +20,7 @@ Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text
 	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
 	
 3. Restart Sublime Text 2.
-4. Press `ctrl+p` (Windows/Linux) or `command+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
+4. Press `ctrl+shift+p` (Windows/Linux) or `command+shift+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
 5. Type GPD and press Enter.
 
 ###Install Method 2 - Clone Repository
@@ -37,7 +37,7 @@ This method has less steps, but you will periodically have to check back to down
 A few steps and you will be on your way.
 
 1. Create new file and give it the extension `.GPD` and open it in Sublime Text 2
-2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+p` (Windows\Linux) or `command+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
+2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+shift+p` (Windows\Linux) or `command+shift+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
 3. Type `//,Tab` and select `Boilerplate` from the selection box. It will instantly give you the section layouts and put your cursor in the `Todo` section.
 4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, \`) you can type `symbol,Tab` to enter them. All of the symbols represent different attributes of the todo:
 	* `#,Tab` --> #(Project) - The project or group of work that this todo is part of.

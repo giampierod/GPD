@@ -15,8 +15,6 @@
 			{ "key": "selector", "operator": "equal", "operand": "source.GPD" }
 		]
 	},
-	{"keys": ["super+shift+-"], "command": "todo_timer_start" },
-	{"keys": ["super+shift+="], "command": "todo_timer_stop" },
 	{"keys": ["super+shift+up"], "command": "done_todo_repeat", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "source.GPD" }

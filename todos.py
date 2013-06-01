@@ -27,19 +27,19 @@ import sublime_plugin
 import re
 
 
-def TODO_HEADER_STRING():
+def todo_header_string():
     return "//Todo//"
 
 
-def CLOSED_HEADER_STRING():
+def closed_header_string():
     return "//Closed//"
 
 
-def TODAY_HEADER_STRING():
+def today_header_string():
     return "//Today//"
 
 
-def FOOTER_STRING():
+def footer_string():
     return "//End//"
 
 
@@ -66,8 +66,8 @@ def move_todo_to_section(section, view, edit, prefix=""):
 def add_to_todo(view, edit):
     cur_line = view.full_line(view.sel()[0].begin())
     if not is_header(view.substr(cur_line).strip()):
-        todo_top = view.find(TODO_HEADER_STRING(), 0)
-        todo_bottom = view.find(FOOTER_STRING(), todo_top.b)
+        todo_top = view.find(todo_header_string(), 0)
+        todo_bottom = view.find(footer_string(), todo_top.b)
         todo = re.sub("\$\([a-zA-Z0-9_ ]*\)[ ]?", '',
                       view.substr(cur_line).rstrip())
         view.insert(edit, todo_bottom.a - 1, "\n" + todo)
@@ -99,8 +99,8 @@ class DoneTodoRepeatCommand(sublime_plugin.TextCommand):
 
 class NewTodoCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        todo_top = self.view.find(TODO_HEADER_STRING(), 0)
-        todo_bottom = self.view.find(FOOTER_STRING(), todo_top.b)
+        todo_top = self.view.find(todo_header_string(), 0)
+        todo_bottom = self.view.find(footer_string(), todo_top.b)
         inserted_length = self.view.insert(edit, todo_bottom.a - 1,
                                            "\n" + "    ") - 1
         cur_todo_pt = self.view.rowcol(todo_bottom.a)
@@ -110,59 +110,67 @@ class NewTodoCommand(sublime_plugin.TextCommand):
         self.view.sel().add(new_todo_pt)
         self.view.show(new_todo_pt)
 
-
-# def increment_seconds():
-#     if sublime.todo_timer_time is not None:
-#         td = datetime.datetime.now() - sublime.todo_timer_time
-#         sublime.todo_timer_seconds += (td.microseconds +
-#                                       (td.seconds + td.days * 24 * 3600) *
-#                                        10 ** 6) / 10 ** 6
-
-
-# def write_time(self, edit):
-#     has_run = hasattr(sublime, 'todo_timer_seconds')
-#     if has_run is False or (has_run and sublime.todo_timer_seconds == 0):
-#         sublime.status_message('todo timer not running')
-#         return
-#     seconds = sublime.todo_timer_seconds
-
-#     hours = seconds // 3600
-#     minutes = (seconds % 3600) // 60
-#     seconds = seconds % 60
-
-#     output = []
-#     output.append('%ih' % hours)
-#     output.append('%im' % minutes)
-#     output.append('%is' % seconds)
-
-#     cur_line = self.view.line(self.view.sel()[0].begin())
-#     line_string = self.view.substr(cur_line).strip()
-#     self.view.replace(edit, cur_line, "    " + line_string +
-#                       " " + "$(" + ' '.join(output) + ")")
+"""
+This section is for the Timer functions. While this feature kind of works,
+it really doesn't do what I want it to do. There is not enough feedback to
+the user. They don't know that the timer is running and it won't span
+computers that the user is using. It just doesn't work in enough circumstances
+to be really useful. I have left the functions uncommented if some users want
+to still use it and bind it to keys. But this feature needs to be reimagined
+for it to be effective.
+"""
+def increment_seconds():
+    if sublime.todo_timer_time is not None:
+        td = datetime.datetime.now() - sublime.todo_timer_time
+        sublime.todo_timer_seconds += (td.microseconds +
+                                      (td.seconds + td.days * 24 * 3600) *
+                                       10 ** 6) / 10 ** 6
 
 
-# class TodoTimerStartCommand(sublime_plugin.ApplicationCommand):
-#     def run(self):
-#         if not hasattr(sublime, 'todo_timer_seconds'):
-#             sublime.todo_timer_seconds = 0
-#         sublime.todo_timer_time = datetime.datetime.now()
+def write_time(self, edit):
+    has_run = hasattr(sublime, 'todo_timer_seconds')
+    if has_run is False or (has_run and sublime.todo_timer_seconds == 0):
+        sublime.status_message('todo timer not running')
+        return
+    seconds = sublime.todo_timer_seconds
+
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = seconds % 60
+
+    output = []
+    output.append('%ih' % hours)
+    output.append('%im' % minutes)
+    output.append('%is' % seconds)
+
+    cur_line = self.view.line(self.view.sel()[0].begin())
+    line_string = self.view.substr(cur_line).strip()
+    self.view.replace(edit, cur_line, "    " + line_string +
+                      " " + "$(" + ' '.join(output) + ")")
 
 
-# class TodoTimerPauseCommand(sublime_plugin.ApplicationCommand):
-#     """A sublime text command to pause the timer"""
-#     def run(self):
-#         try:
-#             increment_seconds()
-#             report_time()
-#             sublime.todo_timer_time = None
-#         except:
-#             sublime.status_message("todo timer not running")
+class TodoTimerStartCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        if not hasattr(sublime, 'todo_timer_seconds'):
+            sublime.todo_timer_seconds = 0
+        sublime.todo_timer_time = datetime.datetime.now()
 
 
-# class TodoTimerStopCommand(sublime_plugin.TextCommand):
-#     """A sublime text command to stop the timer"""
-#     def run(self, edit):
-#         increment_seconds()
-#         write_time(self, edit)
-#         sublime.todo_timer_seconds = 0
-#         sublime.todo_timer_time = None
+class TodoTimerPauseCommand(sublime_plugin.ApplicationCommand):
+    """A sublime text command to pause the timer"""
+    def run(self):
+        try:
+            increment_seconds()
+            report_time()
+            sublime.todo_timer_time = None
+        except:
+            sublime.status_message("todo timer not running")
+
+
+class TodoTimerStopCommand(sublime_plugin.TextCommand):
+    """A sublime text command to stop the timer"""
+    def run(self, edit):
+        increment_seconds()
+        write_time(self, edit)
+        sublime.todo_timer_seconds = 0
+        sublime.todo_timer_time = None

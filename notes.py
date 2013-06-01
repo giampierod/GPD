@@ -44,7 +44,7 @@ def create_note(view, note_time, todo_str):
 
 
 # The pattern for a note header
-def note_pat():
+def note_header_pattern():
     return '`\((.*)\)'
 
 
@@ -74,7 +74,8 @@ def find_note_header(view, header_text):
 
 
 def note_exists(view, cur_line):
-    first_note = view.find(note_pat(), cur_line.a, sublime.IGNORECASE)
+    first_note = view.find(note_header_pattern(), cur_line.a,
+                           sublime.IGNORECASE)
     if first_note is not None:
         return cur_line.contains(first_note)
     else:
@@ -102,10 +103,9 @@ class OpenNoteCommand(sublime_plugin.TextCommand):
         if is_header(todo_str):
             return
         elif note_exists(self.view, cur_line):
-            first_note = self.view.find(note_pat(),
-                                        cur_line.a,
+            first_note = self.view.find(note_header_pattern(), cur_line.a,
                                         sublime.IGNORECASE)
-            m = re.search(note_pat(), self.view.substr(first_note))
+            m = re.search(note_header_pattern(), self.view.substr(first_note))
             inner_note = m.group(1)
             todo_str_min = todo_str.replace(m.group(0), "").strip()
             note_view = open_note_file(self.view)
