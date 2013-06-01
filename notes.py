@@ -97,7 +97,7 @@ class OpenNoteCommand(sublime_plugin.TextCommand):
         cur_line = self.view.full_line(self.view.sel()[0].begin())
         todo_str = self.view.substr(cur_line).strip()
 
-        if is_header(todo+_str):
+        if is_header(todo_str):
             return
         elif note_exists(self.view, cur_line):
             first_note = self.view.find(note_pat(),

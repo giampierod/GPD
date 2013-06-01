@@ -24,17 +24,39 @@ Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text
 5. Type GPD and press Enter.
 
 ###Instal Method 2 - Clone Repository
+This method has less steps, but you will periodically have to check back to download updates. 
 
-
-1. Make sure you have git installed
-2. Install Package Control from will bond (http://wbond.net/sublime_packages/package_control)
-Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text below into the console that appears.
-	
-	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
-	
+1. Open a terminal or command prompt and navigate to the Packages folder of your Sublime Text 2 installation:
+	* Windows - cd %APPDATA%\Sublime Text 2\Packages
+	* Mac - cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages
+	* Linux - cd ~/.config/sublime-text/Packages
+2. Type `git clone https://github.com/Gimped/GPD` and press `Enter`
 3. Restart Sublime Text 2.
-4. Press `ctrl+p` (Windows/Linux) or `command+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
-5. Type GPD and press Enter.
+
+###Getting started
+A few steps and you will be on your way.
+
+1. Create new file and give it the extension `.GPD` and open it in Sublime Text 2
+2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+p` (Windows\Linux) or `Command+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
+3. Type `//`,`tab` and select `Boilerplate` from the selection box. It will instantly give you the section layouts and put your cursor in the `Todo` section.
+4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, `) you can type `symbol`,`tab` to enter them. All of the symbols represent different attributes of the todo:
+	* `#`,`tab` -> #(Project) - The project or group of work that this todo is part of.
+	* '!`,`tab` -> !(Target) - A measurable target for the todo. For example, a date, a specific performance metric, etc.
+	* `@`,`tab` -> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person who are waiting or may need to call.
+	* `$`,`tab` -> $(Cost) - The amount of time or other cost metric that should be accounted for this todo.
+	* `~`,`tab` -> ~(Completion Date) - The data that you finished the todo.
+	* ````,`tab` -> `(Note ID) - An ID that references the Note attached to this todo
+5. Once you got this under control, you will want to get familiar with the shortucts. 
+
+###Shortcuts
+Shortcuts make GPD what it is, if you don't learn them it's not really going to work that well.
+
+	* `ctrl+shift+n` - Create a new Todo at the bottom of the //Todo// section
+	* `ctrl+shift+.` - Move the currently selected Todo at the top of the //Today// section
+	* `ctrl+shift+down` - Move the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
+	* `ctrl+shift+up` - Do the same as `ctrl+shift+down` except it will also copy the todo to the bottom of the //Todo// section
+	* `ctrl+shift+,` - Get the note for this todo. It will either find or create the note for you in a companion `.GPD_Note` file. When in the GPD_Note file, you can press this again to switch back.
+
 
 ###Special Text
 
@@ -49,17 +71,6 @@ There are 5 symbols that can be used to encapsulate text which gives the text sp
 ###Sections
 
 Todos are divided into different sections. Today, Goals, Todo, and Closed. These sections are noted by `//Section Name//` followed by an `//End//`. The Today, Todo, and Closed sections are mandatory for this Sublime Text package. You can create any other sections you want.
-
-###Usage
-1. Create a new file. Type //-tab and select Boilerplate from the selection box. It will instantly give you the section layouts  
-2. Create some Goals and Todos. All the symbols listed above (#, !, @, $, ~) are all tab triggered. I usually start with goals and specify #(Project) !(Target) for each goal and try to avoid any free form text. That's just a suggestion, this thing is free form.  
-3. Start working on todos. There are some shortcuts to help you (for Mac OS X replace `ctrl` with `command`):
-	* `ctrl+shift+n` will create a new item at the bottom of the //Todo// section
-	* `ctrl+shift+.` will put the current todo at the top of the //Today// section
-	* `ctrl+shift+down` will put the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
-	* `ctrl+shift+up` will do the same as `ctrl+shift+down` except it will also put the same todo at the bottom of the //Todo// section
-	* `ctrl+shift+-` will start a time to track the time it takes to do the todo
-	* `ctrl+shift+=` will stop the timer and put a $(total_time) at the end of the todo
 
 
 ###License
