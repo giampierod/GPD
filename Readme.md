@@ -4,11 +4,15 @@ The GPD system is meant for people who spend a great deal of time text editing. 
 
 ###Pre-Requisites
 
-To install GPD, you first need to install Sublime Text 2 (http://www.sublimetext.com/). This a great application for editing text and supports Linux, Mac, and Windows equally well. 
+To install GPD, you first need to install Sublime Text 2. Go to the following linke to download, http://www.sublimetext.com/. This a great application for editing text and supports Linux, Mac, and Windows equally well.
+
+If you are using the git install method, then you are going to the need the git client. You can go to the following link to find out more, http://git-scm.com/downloads.
 
 Once you got Sublime Text 2 up and running there two methods of installing GPD.
 
-###Instal Method 1 - Recommended
+###Instal Method 1 - Will Bond's Package Control (Recommended)
+Will Bond has made a great plugin that loads packages into Sublime Text. If you use this method you will automatically get updates of GPD when they are released. I highly recommend using this approach.
+
 1. Start Sublime Text 2
 2. Install Package Control from will bond (http://wbond.net/sublime_packages/package_control)
 Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text below into the console that appears.
@@ -16,7 +20,20 @@ Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text
 	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
 	
 3. Restart Sublime Text 2.
-4. Press `ctrl+p` (Windows/Linux) or `super+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
+4. Press `ctrl+p` (Windows/Linux) or `command+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
+5. Type GPD and press Enter.
+
+###Instal Method 2 - Clone Repository
+
+
+1. Make sure you have git installed
+2. Install Package Control from will bond (http://wbond.net/sublime_packages/package_control)
+Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text below into the console that appears.
+	
+	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
+	
+3. Restart Sublime Text 2.
+4. Press `ctrl+p` (Windows/Linux) or `command+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
 5. Type GPD and press Enter.
 
 ###Special Text
@@ -36,7 +53,7 @@ Todos are divided into different sections. Today, Goals, Todo, and Closed. These
 ###Usage
 1. Create a new file. Type //-tab and select Boilerplate from the selection box. It will instantly give you the section layouts  
 2. Create some Goals and Todos. All the symbols listed above (#, !, @, $, ~) are all tab triggered. I usually start with goals and specify #(Project) !(Target) for each goal and try to avoid any free form text. That's just a suggestion, this thing is free form.  
-3. Start working on todos. There are some shortcuts to help you (for Mac OS X replace `ctrl` with `super`):
+3. Start working on todos. There are some shortcuts to help you (for Mac OS X replace `ctrl` with `command`):
 	* `ctrl+shift+n` will create a new item at the bottom of the //Todo// section
 	* `ctrl+shift+.` will put the current todo at the top of the //Today// section
 	* `ctrl+shift+down` will put the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
