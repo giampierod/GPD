@@ -124,7 +124,6 @@ def write_time(self, edit):
     if has_run is False or (has_run and sublime.todo_timer_seconds == 0):
         sublime.status_message('todo timer not running')
         return
-
     seconds = sublime.todo_timer_seconds
 
     hours = seconds // 3600
@@ -164,8 +163,6 @@ class TodoTimerStopCommand(sublime_plugin.TextCommand):
     """A sublime text command to stop the timer"""
     def run(self, edit):
         increment_seconds()
-
         write_time(self, edit)
-
         sublime.todo_timer_seconds = 0
         sublime.todo_timer_time = None

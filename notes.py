@@ -29,14 +29,15 @@ import re
 from todos import is_header
 
 
-def prepare_view(view, note_time, todo_str):
+# Create a new note section with boilerplate text in the view supplied
+def create_note(view, note_time, todo_str):
     edit = view.begin_edit()
     note_header = "//{0}//\n".format(note_time)
     note_footer = "//End//\n\n"
     note_boiler_str = ("%s    %s\n\n    \n%s" %
                       (note_header, todo_str, note_footer))
     boiler_length = view.insert(edit, 0, note_boiler_str)
-    collapse_other_notes(view, sublime.Region(0, boiler_length - 1))
+    fold_notes(view, sublime.Region(0, boiler_length - 1))
     boiler_region = sublime.Region(boiler_length - len(note_footer) - 1,
                                    boiler_length - len(note_footer) - 1)
     view.sel().clear()
@@ -45,16 +46,20 @@ def prepare_view(view, note_time, todo_str):
     view.end_edit(edit)
 
 
+# The pattern for a note header
 def note_pat():
     return '`\((.*)\)'
 
 
-def collapse_other_notes(view, note_region):
+# Fold the other notes, and unfold the selected not so the user can focus
+# on the note they are working on.
+def fold_notes(view, note_region):
     view.fold(sublime.Region(0, note_region.a))
     view.unfold(note_region)
     view.fold(sublime.Region(note_region.b, view.size() - 1))
 
 
+# Find a note with the given header_text in the view
 def find_note_header(view, header_text):
     search = view.find("//{0}//".format(header_text), 0)
     if search is not None:
@@ -63,7 +68,7 @@ def find_note_header(view, header_text):
         note_footer = view.full_line(view.find("//End//", note_header.b))
         end_of_note = note_footer.a - 1
         note_region = note_header.cover(note_footer)
-        collapse_other_notes(view, note_region)
+        fold_notes(view, note_region)
         view.sel().add(end_of_note)
         view.show(end_of_note)
         return True
@@ -115,7 +120,7 @@ class OpenNoteCommand(sublime_plugin.TextCommand):
                                   todo_str_min,
                                   True)
             elif not find_note_header(note_view, inner_note):
-                prepare_view(note_view, inner_note, todo_str_min)
+                create_note(note_view, inner_note, todo_str_min)
         else:
             self.view.insert(edit, cur_line.end() - 1,
                              " `({0})".format(note_time))
@@ -124,7 +129,7 @@ class OpenNoteCommand(sublime_plugin.TextCommand):
                 NoteLoadListener._set_attr(note_view.file_name(), note_time,
                                   todo_str, False)
             else:
-                prepare_view(note_view, note_time, todo_str)
+                create_note(note_view, note_time, todo_str)
 
 # This workaround will be gone in Sublime 3
 class NoteLoadListener(sublime_plugin.EventListener):
@@ -148,7 +153,7 @@ class NoteLoadListener(sublime_plugin.EventListener):
         if note_exists and find_note_header(view, NoteLoadListener.header_str):
             pass
         elif view.file_name() == NoteLoadListener.target_filename:
-            prepare_view(view, NoteLoadListener.header_str, NoteLoadListener.todo_str)
+            create_note(view, NoteLoadListener.header_str, NoteLoadListener.todo_str)
             NoteLoadListener.target_filename = ""
             NoteLoadListener.header_str = ""
             NoteLoadListener.todo_str = ""
