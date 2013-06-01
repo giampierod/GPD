@@ -59,16 +59,6 @@ For Mac replace `ctrl` with `command`.
 * `ctrl+shift+up` - Do the same as `ctrl+shift+down` except it will also copy the todo to the bottom of the //Todo// section
 * `ctrl+shift+,` - Get the note for this todo. It will either find or create the note for you in a companion `.GPD_Note` file. When in the GPD_Note file, you can press this again to switch back.
 
-###Special Text
-
-There are 5 symbols that can be used to encapsulate text which gives the text special meaning.
-
-`#(Project)` = Represents a project or collection of work that is larger than an indvidual todo  
-`!(Target)` = Represents some measurable aspect of a project or a todo. For example, a target weight for a weight loss project or the due date of a project.  
-`@(Context)` = Represents People, Places, or Times that the todo is related to. For example, a meeting room or the time of the meeting.   
-`$(Cost)` = Represents the time it took to complete the task. This is totally free form, so you could put the actual time in hours, minutes, seconds or some other metric like pomodoros.  
-`~(Date/Time)` = The time and date that this todo was done.  
-
 ###Sections
 
 Todos are divided into different sections. Today, Goals, Todo, and Closed. These sections are noted by `//Section Name//` followed by an `//End//`. The Today, Todo, and Closed sections are mandatory for this Sublime Text package. You can create any other sections you want.
