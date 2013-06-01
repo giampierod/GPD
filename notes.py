@@ -37,12 +37,9 @@ def create_note(view, note_time, todo_str):
     note_boiler_str = ("%s    %s\n\n    \n%s" %
                       (note_header, todo_str, note_footer))
     boiler_length = view.insert(edit, 0, note_boiler_str)
-    fold_notes(view, sublime.Region(0, boiler_length - 1))
     boiler_region = sublime.Region(boiler_length - len(note_footer) - 1,
                                    boiler_length - len(note_footer) - 1)
-    view.sel().clear()
-    view.sel().add(boiler_region)
-    view.show(boiler_region)
+    highlight_note(view, sublime.Region(0, boiler_length - 1), boiler_region)
     view.end_edit(edit)
 
 
@@ -53,24 +50,24 @@ def note_pat():
 
 # Fold the other notes, and unfold the selected not so the user can focus
 # on the note they are working on.
-def fold_notes(view, note_region):
+def highlight_note(view, note_region, end_of_note):
+    view.sel().clear()
+    view.sel().add(end_of_note)
+    view.show(end_of_note)
     view.fold(sublime.Region(0, note_region.a))
     view.unfold(note_region)
     view.fold(sublime.Region(note_region.b, view.size() - 1))
-
+    
 
 # Find a note with the given header_text in the view
 def find_note_header(view, header_text):
     search = view.find("//{0}//".format(header_text), 0)
     if search is not None:
-        view.sel().clear()
         note_header = view.full_line(search)
         note_footer = view.full_line(view.find("//End//", note_header.b))
         end_of_note = note_footer.a - 1
         note_region = note_header.cover(note_footer)
-        fold_notes(view, note_region)
-        view.sel().add(end_of_note)
-        view.show(end_of_note)
+        highlight_note(view, note_region, end_of_note)        
         return True
     else:
         return False
