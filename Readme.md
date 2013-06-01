@@ -10,7 +10,7 @@ If you are using the git install method, then you are going to the need the git 
 
 Once you got Sublime Text 2 up and running there two methods of installing GPD.
 
-###Instal Method 1 - Will Bond's Package Control (Recommended)
+###Install Method 1 - Will Bond's Package Control (Recommended)
 Will Bond has made a great plugin that loads packages into Sublime Text. If you use this method you will automatically get updates of GPD when they are released. I highly recommend using this approach.
 
 1. Start Sublime Text 2
@@ -23,7 +23,7 @@ Open the Sublime Text 2 console by pressing ``ctrl+` `` shortcut. Paste the text
 4. Press `ctrl+p` (Windows/Linux) or `command+p` (Mac) and type Install Package. You should see "Package Control: Install Package".
 5. Type GPD and press Enter.
 
-###Instal Method 2 - Clone Repository
+###Install Method 2 - Clone Repository
 This method has less steps, but you will periodically have to check back to download updates. 
 
 1. Open a terminal or command prompt and navigate to the Packages folder of your Sublime Text 2 installation:
