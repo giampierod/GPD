@@ -61,7 +61,7 @@ For Mac replace `ctrl` with `command`.
 
 ###Sections
 
-Todos are divided into different sections. Today, Goals, Todo, and Closed. These sections are noted by `//Section Name//` followed by an `//End//`. The Today, Todo, and Closed sections are mandatory for this Sublime Text package. You can create any other sections you want.
+Todos are divided into different sections. Today, Goals, and Closed. These sections are noted by `//Section Name//` followed by an `//End//`. The Today, Todo, and Closed sections are mandatory for this Sublime Text package. You can create any other sections you want.
 
 
 ###License
