@@ -37,15 +37,15 @@ This method has less steps, but you will periodically have to check back to down
 A few steps and you will be on your way.
 
 1. Create new file and give it the extension `.GPD` and open it in Sublime Text 2
-2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+p` (Windows\Linux) or `Command+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
-3. Type `//`,`tab` and select `Boilerplate` from the selection box. It will instantly give you the section layouts and put your cursor in the `Todo` section.
-4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, `) you can type `symbol`,`tab` to enter them. All of the symbols represent different attributes of the todo:
-	* `#`,`tab` -> #(Project) - The project or group of work that this todo is part of.
-	* '!`,`tab` -> !(Target) - A measurable target for the todo. For example, a date, a specific performance metric, etc.
-	* `@`,`tab` -> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person who are waiting or may need to call.
-	* `$`,`tab` -> $(Cost) - The amount of time or other cost metric that should be accounted for this todo.
-	* `~`,`tab` -> ~(Completion Date) - The data that you finished the todo.
-	* ````,`tab` -> `(Note ID) - An ID that references the Note attached to this todo
+2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+p` (Windows\Linux) or `command+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
+3. Type `//,Tab` and select `Boilerplate` from the selection box. It will instantly give you the section layouts and put your cursor in the `Todo` section.
+4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, `) you can type `symbol,Tab` to enter them. All of the symbols represent different attributes of the todo:
+	* `#,Tab` -> #(Project) - The project or group of work that this todo is part of.
+	* `!,Tab` -> !(Target) - A measurable target for the todo. For example, a date, a specific performance metric, etc.
+	* `@,Tab` -> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person who are waiting or may need to call.
+	* `$,Tab` -> $(Cost) - The amount of time or other cost metric that should be accounted for this todo.
+	* `~,Tab` -> ~(Completion Date) - The data that you finished the todo.
+	* ```,Tab`` -> `(Note ID) - An ID that references the Note attached to this todo
 5. Once you got this under control, you will want to get familiar with the shortucts. 
 
 ###Shortcuts
