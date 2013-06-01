@@ -39,7 +39,7 @@ A few steps and you will be on your way.
 1. Create new file and give it the extension `.GPD` and open it in Sublime Text 2
 2. If it doesn't automatically get recognized (You will see GPD in the bottom right corner), then press `ctrl+p` (Windows\Linux) or `command+p` (Mac) and type `GPD` and press `Enter`. You should see the bottom right of the status bar change.
 3. Type `//,Tab` and select `Boilerplate` from the selection box. It will instantly give you the section layouts and put your cursor in the `Todo` section.
-4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, ``) you can type `symbol,Tab` to enter them. All of the symbols represent different attributes of the todo:
+4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, \`) you can type `symbol,Tab` to enter them. All of the symbols represent different attributes of the todo:
 	* `#,Tab` -> #(Project) - The project or group of work that this todo is part of.
 	* `!,Tab` -> !(Target) - A measurable target for the todo. For example, a date, a specific performance metric, etc.
 	* `@,Tab` -> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person who are waiting or may need to call.
@@ -51,12 +51,13 @@ A few steps and you will be on your way.
 ###Shortcuts
 Shortcuts make GPD what it is, if you don't learn them it's not really going to work that well.
 
+For Mac replace `ctrl` with `command`.
+
 	* `ctrl+shift+n` - Create a new Todo at the bottom of the //Todo// section
 	* `ctrl+shift+.` - Move the currently selected Todo at the top of the //Today// section
 	* `ctrl+shift+down` - Move the current todo at the top of //Closed// section and put a ~(datetime.now) at the front of the todo
 	* `ctrl+shift+up` - Do the same as `ctrl+shift+down` except it will also copy the todo to the bottom of the //Todo// section
 	* `ctrl+shift+,` - Get the note for this todo. It will either find or create the note for you in a companion `.GPD_Note` file. When in the GPD_Note file, you can press this again to switch back.
-
 
 ###Special Text
 
