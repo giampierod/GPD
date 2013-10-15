@@ -4,7 +4,7 @@ The GPD system is meant for people who spend a great deal of time text editing. 
 
 ###Pre-Requisites
 
-To install GPD, you first need to install Sublime Text 2. Go to the following linke to download, http://www.sublimetext.com/. This a great application for editing text and supports Linux, Mac, and Windows equally well.
+To install GPD, you first need to install Sublime Text 2. Go to the following link to download, http://www.sublimetext.com/. This a great application for editing text and supports Linux, Mac, and Windows equally well.
 
 If you are using the git install method, then you are going to the need the git client. You can go to the following link to find out more, http://git-scm.com/downloads.
 
@@ -42,9 +42,9 @@ A few steps and you will be on your way.
 4. Create some Todos. Use symbols to note various aspects of the Todo. For all the symbols available (#, !, @, $, ~, \`) you can type `symbol,Tab` to enter them. All of the symbols represent different attributes of the todo:
 	* `#,Tab` --> #(Project) - The project or group of work that this todo is part of.
 	* `!,Tab` --> !(Target) - A measurable target for the todo. For example, a date, a specific performance metric, etc.
-	* `@,Tab` --> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person who are waiting or may need to call.
+	* `@,Tab` --> @(Context) - People, places, or things that are related or required for the Todo. Such as a meeting room, a person whom you are waiting for or may need to call.
 	* `$,Tab` --> $(Cost) - The amount of time or other cost metric that should be accounted for this todo.
-	* `~,Tab` --> ~(Completion Date) - The data that you finished the todo.
+	* `~,Tab` --> ~(Completion Date) - The date that you finished the todo.
 	* ```,Tab`` --> `(Note ID) - An ID that references the Note attached to this todo
 5. Once you got this under control, you will want to get familiar with the shortucts. 
 
